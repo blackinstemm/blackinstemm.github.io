@@ -3,33 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BlackInSTEMM — Home</title>
+  <title>BlackInSTEMM</title>
   <meta name="description" content="BlackInSTEMM is a collective network of member organizations collaborating to support Black scientists and professionals in STEMM.">
 
-  <!-- Google Fonts (Josefin Sans, used for both headings and body text).
+  <!-- Google Fonts ("Fraunces" for headings, "Inter" for body/UI text).
        Delete these two lines if you'd rather not load fonts from Google —
        the site will fall back to system fonts automatically. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Site-wide stylesheet (all pages share this one file) -->
-  <link rel="stylesheet" href="css/style.css">
+  <!-- Site-wide stylesheet -->
+  <link rel="stylesheet" href="css/style.css?v=2">
 </head>
 <body>
 
   <!-- ==========================================================================
-       SHARED HEADER / NAVIGATION
-       This exact block is copy-pasted at the top of every page. If you add a
-       new page or rename a nav link, update this block on ALL pages, or
-       the pages will fall out of sync. See README.md for details.
+       THIS IS A SINGLE-PAGE SITE
+       Every section lives on this one page now. The nav links below don't
+       go to other files — they jump down to a section on this same page
+       using its id (e.g. href="#mission" jumps to <section id="mission">).
+       To reorder sections, just move the whole <section>...</section>
+       block to a new spot in this file.
+       ========================================================================== -->
+
+  <!-- ==========================================================================
+       HEADER / NAVIGATION
        ========================================================================== -->
   <header class="site-header">
     <div class="container nav-wrapper">
 
-      <!-- Logo + collective name. Replace the image in images/logo/ with
-           your real logo whenever you have one. -->
+      <!-- Logo + collective name. Replace the image in images/logo/ with a
+           new file whenever you have one (and update the src below to match). -->
       <a href="index.html" class="nav-brand">
-        <img src="images/logo/logo-placeholder.svg" alt="BlackInSTEMM logo">
+        <img src="images/logo/blackinstemm-logo.png" alt="BlackInSTEMM logo">
         <span>BlackInSTEMM</span>
       </a>
 
@@ -40,16 +46,13 @@
         <span></span>
       </button>
 
-      <!-- Main navigation links. The "active" class highlights the current page. -->
+      <!-- Main navigation links — each one scrolls down to a section on
+           this page rather than loading a new page. -->
       <ul class="nav-links">
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <!-- Organizations and Events are temporarily hidden from navigation —
-             the pages still exist (not deleted), just unlinked. Delete this
-             comment and the two lines below to bring them back. -->
-        <!-- <li><a href="organizations.html">Organizations</a></li>
-        <li><a href="events.html">Events</a></li> -->
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="#member-organizations">Organizations</a></li>
+        <li><a href="#mission">Mission</a></li>
+        <li><a href="#values">Values</a></li>
+        <li><a href="#events">Events</a></li>
       </ul>
 
     </div>
@@ -57,77 +60,119 @@
 
 
   <!-- ==========================================================================
-       HERO SECTION
+       HERO SECTION + MEMBER ORGANIZATIONS GRID
+       NEW TEXT ADDED — the "Member Organizations" heading below is new,
+       not something you wrote. Reword or remove it as you like.
        ========================================================================== -->
   <section class="hero">
     <div class="container">
-      <h1>Welcome to the STEMM Collective</h1>
-      <p>Centering Black Knowledge. Building Collective Power. Transforming STEMM.</p>
-      <div class="hero-buttons">
-        <!-- Links to the (currently hidden) Organizations page — see the
-             nav comment above. Delete this comment and the line below to
-             bring the button back. -->
-        <!-- <a href="organizations.html" class="btn btn-primary">BlackInSTEMM Organizations</a> -->
-        <a href="about.html" class="btn btn-outline">Our Story</a>
+      <div class="hero-heading-row">
+        <div class="hero-heading-text">
+          <h1>Black In STEMM</h1>
+          <p>Centering Black Knowledge. Building Collective Power. Transforming STEMM.</p>
+        </div>
+        <img src="images/logo/blackinstemm-logo.png" alt="BlackInSTEMM logo" class="hero-logo">
+      </div>
+
+      <!-- Filled in automatically by js/main.js, using the
+           "memberOrganizations" data list in that file. To add, remove, or
+           edit an organization here, edit js/main.js — see the comments
+           there for the exact steps. -->
+      <h2 id="member-organizations">Member Organizations</h2>
+      <div id="member-orgs-grid" class="card-grid">
+        <!-- Organization cards are inserted here by JavaScript. -->
       </div>
     </div>
   </section>
 
 
   <!-- ==========================================================================
-       MISSION STATEMENT SECTION
+       MISSION SECTION
        ========================================================================== -->
-  <section class="mission">
+  <section id="mission" class="section-alt mission">
     <div class="container">
-      <h2>Our Mission</h2>
-      <p class="section-subtitle">
-        In 2020, grassroots organizations led by scientists and science trainees resulted in the formation of many groups, each providing community and support to scientists within their field. BlackInSTEMM houses these groups under one umbrella. Our mission is to empower, elevate, and connect Black scholars across STEMM through interdisciplinary collaboration, collective support, and transformative action. We center Black scholars as knowledge producers, innovators, and leaders, fostering a community where professionals and trainees can build meaningful connections, access sustainable mentorship, and thrive together. We work to transform scientific culture beyond individual resilience toward collective empowerment. We envision STEMM as a place where Black scholars belong, thrive, and lead, and where future generations are equipped to shape the future of science.
-      </p>
-    </div>
+       <h2>Our Mission</h2>
+
+    <p class="section-subtitle">
+      Our mission is to <strong>empower, elevate, and connect Black scholars across STEMM (Science, Technology, Engineering, Mathematics, and Medicine)</strong> by cultivating a collaborative community grounded in collective support, shared knowledge, and transformative action. We center Black scholars as knowledge producers, innovators, and leaders while recognizing each of our intellectual contributions, expertise, and lived experiences contribute to how we view science.
+    </p>
+
+    <p class="section-subtitle">
+      Through interdisciplinary collaboration, sustainable mentorship, and advocating for equitable infrastructure, we foster spaces where Black professionals and trainees can build meaningful relationships, access resources, share opportunities, and thrive collectively. We are committed to supporting, uplifting, and amplifying Black-led organizations, initiatives, and communities throughout STEMM.
+    </p>
+
+    <p class="section-subtitle">
+      Beyond supporting individual success in STEMM, we seek to transform institutional structures and scientific cultures that shape who belongs, who leads, and whose knowledge is valued. By prioritizing collective action, strengthening community, and expanding pathways to leadership, we envision a world where Black scholars are empowered to belong, thrive, innovate, and lead—and where future generations have the opportunity and infrastructure to do the same.
+    </p>
+  </div>
   </section>
 
 
   <!-- ==========================================================================
-       HIGHLIGHTS SECTION (quick links into the other pages)
-       Temporarily hidden entirely — 2 of its 3 cards point to the
-       Organizations and Events pages, which are hidden from navigation
-       right now, and this section looks broken with only 1 of 3 cards
-       showing. Delete this comment and the <section>...</section> below
-       to bring it back (e.g. once Organizations/Events are unhidden, or
-       after editing it down to just the "Get In Touch" card).
-  <section class="section-alt">
+       VALUES SECTION
+       ========================================================================== -->
+  <section id="values">
     <div class="container">
-      <h2 style="text-align:center;">Explore the Collective</h2>
+      <h2 style="text-align:center;">Our Values</h2>
+      <p class="section-subtitle" style="text-align:center; margin-left:auto; margin-right:auto;">
+        Our mission is to empower, elevate, and connect Black scholars across STEMM through interdisciplinary collaboration, collective support, and transformative action.
+      </p>
 
-      <div class="highlights-grid">
+      <!-- Add, remove, or rename value cards freely — the grid below
+           automatically adjusts to however many you have (see the
+           "VALUES SECTION" comment in css/style.css). -->
+      <div class="values-grid">
 
-        <div class="highlight-card">
-          <h3>Member Organizations</h3>
-          <p>Learn more about our participating member organizations.</p>
-          <a href="organizations.html" class="btn btn-primary">View Organizations</a>
+        <div class="value-card">
+          <h3>Belonging</h3>
+          <p>Cultivating a safe, mindful community where Black scholars across STEMM disciplines  are valued, supported, and authentically included.</p>
         </div>
 
-        <div class="highlight-card">
-          <h3>Connect with Us</h3>
-          <p>Check out upcoming opportunities to connect with our organizations.</p>
-          <a href="events.html" class="btn btn-primary">Events</a>
+        <div class="value-card">
+          <h3>Representation</h3>
+          <p>Building visible pathways and elevating Black scholars in STEMM as  mentors and leaders for future generations who provide actionable guidance, network access, and sustained career support across all stages.</p>
         </div>
 
-        <div class="highlight-card">
-          <h3>Get In Touch</h3>
-          <p>Have a question or want to get involved?</p>
-          <a href="about.html" class="btn btn-primary">Contact Us</a>
+        <div class="value-card">
+          <h3>Scientific Excellence</h3>
+          <p>While we prioritize a supportive, safe space for Black STEMM scholars, we are scholars. We aim to showcase our respective contributions to knowledge, rigor, and innovation across STEMM.</p>
+        </div>
+
+        <div class="value-card">
+          <h3>Collaboration</h3>
+          <p>As an interdisciplinary community, we encourage our members to utilize this group to find fruitful, innovative collaborative opportunities which mutually benefit their scientific pursuits.</p>
         </div>
 
       </div>
     </div>
   </section>
-  ========================================================================== -->
 
 
   <!-- ==========================================================================
-       SHARED FOOTER
-       This exact block is copy-pasted at the bottom of every page.
+       EVENTS SECTION
+       NEW TEXT ADDED — the "Events" heading below is new, not something
+       you wrote. Reword or remove it as you like.
+       The roadmap image sits next to the ABRCMS session cards, which are
+       filled in automatically by js/main.js from the "abrcmsEvents" data
+       list in that file — see the comments there for how to add a new one.
+       To swap the roadmap image, replace the file in images/events/ and
+       update the src below if the filename changes. -->
+  <section id="events" class="section-alt">
+    <div class="container">
+      <h2 style="text-align:center;">Events</h2>
+      <div class="events-layout">
+        <img src="images/events/events-roadmap.png" alt="BlackInSTEMM events and social media roadmap" class="events-image">
+        <div id="abrcms-events-list" class="abrcms-events-list">
+          <!-- ABRCMS session cards are inserted here by JavaScript. -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ==========================================================================
+       FOOTER
        ========================================================================== -->
   <footer class="site-footer">
     <div class="container footer-content">
@@ -137,15 +182,14 @@
         <p>A collective of STEMM organizations.</p>
       </div>
 
-      <!-- <div class="footer-column">
+      <div class="footer-column">
         <h4>Quick Links</h4>
         <ul class="footer-links">
-          <li><a href="about.html">About</a></li>
-          <li><a href="organizations.html">Organizations</a></li>
-          <li><a href="events.html">Events</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#mission">Mission</a></li>
+          <li><a href="#values">Values</a></li>
+          <li><a href="#events">Events</a></li>
         </ul>
-      </div> -->
+      </div>
 
       <div class="footer-column">
         <h4>Contact</h4>
@@ -166,9 +210,7 @@
     </div>
   </footer>
 
-  <!-- Site-wide JavaScript (mobile nav toggle, and in Stage 2, the
-       Organizations/Events list rendering). Loaded last so the page
-       content above is available before the script runs. -->
-  <script src="js/main.js"></script>
+  <!-- Site-wide JavaScript (mobile nav toggle + Member Organizations grid). -->
+  <script src="js/main.js?v=2"></script>
 </body>
 </html>

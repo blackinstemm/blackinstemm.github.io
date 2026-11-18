@@ -11,8 +11,8 @@
    that variable is used across every page. You should almost never
    need to touch colors/fonts/spacing outside of this one block.
 
-   This is a DARK theme: the page background is near-black, and all
-   text/borders/effects are built to work on top of that.
+   This is a WARM, LIGHT theme: an ivory page canvas, a deep forest-green
+   anchor color (nav, footer, headings), and gold + red as accents.
    ========================================================================== */
 
 
@@ -26,40 +26,41 @@
      pulls its color from one of these variables, so changing a value
      here changes it everywhere it's used. */
 
-  --color-bg:               #0A0A0A; /* main page background — near-black */
-  --color-bg-alt:           #161616; /* slightly lighter background — nav bar, footer, cards, alternating sections */
+  --color-bg:      #FAF5EC; /* main page background — warm ivory */
+  --color-bg-alt:  #F3ECDC; /* subtly deeper cream — used for alternating sections */
+  --color-surface: #FFFFFF; /* card backgrounds — pops gently against the ivory canvas */
 
-  --color-text:             #F2F0EB; /* main text color — off-white, used on the dark background everywhere */
-  --color-text-muted:       #A8A8A8; /* dimmer text — captions, subtext */
+  --color-primary: #1F3B30; /* deep forest green — nav bar, footer, headings, anchors the brand */
 
-  --color-accent-primary:    #D9A441; /* gold — links, buttons, nav highlight, main call-to-action */
-  --color-accent-secondary:  #2EC4B6; /* teal — hover states, secondary highlights */
-  --color-accent-terracotta: #C1502E; /* warm red-orange — used sparingly for variety, e.g. card accents */
-  --color-accent-green:      #1B7340; /* green — used sparingly for variety, e.g. card accents, tags in Stage 2 */
+  --color-text:        #3A362E; /* main body text — warm charcoal, softer than pure black */
+  --color-text-muted:  #6B6355; /* lighter text — captions, subtext */
+
+  --color-accent-gold: #D9A441; /* gold — primary buttons, active nav underline, highlights */
+  --color-accent-red:  #A3272A; /* deep red — secondary links, small tags, hover accents */
+
+  /* text colors to use ON TOP OF a solid color background, chosen for
+     contrast against that specific color */
+  --color-on-primary: #F4EDDC; /* warm cream text, used on the green nav/footer */
+  --color-on-gold:    var(--color-primary); /* green text, used on gold buttons */
 
   /* --- SUPPORTING COLORS --------------------------------------------------
-     These aren't part of your brand palette above — they're small helper
-     values derived from it, only used for subtle borders/shadows so cards
-     and dividers are visible against the near-black background. Adjust the
-     last number in each rgba() (the opacity, 0 to 1) to make them more or
-     less visible. */
+     These aren't part of your 3 brand accent colors above — they're small
+     helper values derived from the palette, only used for subtle borders/
+     shadows so cards read as "lifted" against the ivory background. */
 
-  --color-border:          rgba(242, 240, 235, 0.12); /* faint off-white line — card borders, dividers */
-  --color-button-text:     var(--color-bg);           /* dark text on top of gold/teal buttons, for contrast */
+  --color-border: #E5DAC3; /* warm tan line — card borders, dividers */
+  --shadow-card:  0 6px 20px rgba(31, 59, 48, 0.08); /* soft, green-tinted shadow — not harsh black */
 
   /* --- FONTS ------------------------------------------------------------
-     "Josefin Sans" is loaded from Google Fonts in the <head> of every
-     page and used for both headings and body text. If you'd rather not
-     load fonts from Google (e.g. for privacy or speed), delete the
-     <link> tags in each HTML file's <head> and these variables will fall
-     back to your computer's default fonts automatically. If you want a
-     different pairing later, you can also set --font-body to a separate
-     (more traditional/readable) font and just keep Josefin Sans on
-     --font-heading — Josefin Sans is a distinctive display font that's
-     easiest to read at heading sizes. */
+     Two fonts are loaded from Google Fonts in the <head> of every page:
+     "Fraunces" (an expressive serif) for headings, and "Inter" (a clean
+     sans-serif) for body text and UI elements like buttons/nav. If you'd
+     rather not load fonts from Google (e.g. for privacy or speed), delete
+     the <link> tags in each HTML file's <head> and these variables will
+     fall back to your computer's default fonts automatically. */
 
-  --font-heading: 'Josefin Sans', 'Segoe UI', Arial, sans-serif;
-  --font-body:    'Josefin Sans', 'Segoe UI', Arial, sans-serif;
+  --font-heading: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body:    'Inter', 'Segoe UI', Arial, sans-serif;
 
   --font-size-base: 16px; /* base text size that everything else scales from */
 
@@ -77,12 +78,11 @@
   /* --- LAYOUT -------------------------------------------------------- */
 
   --container-max-width: 1100px; /* content stops getting wider than this, and centers */
-  --border-radius: 8px;          /* roundness of cards, buttons, images */
+  --border-radius: 6px;          /* roundness of cards, buttons, images */
 
   /* --- EFFECTS --------------------------------------------------------- */
 
   --transition-speed: 0.2s;
-  --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.45);
 }
 
 
@@ -107,7 +107,7 @@ body {
   font-family: var(--font-body);
   color: var(--color-text);
   background-color: var(--color-bg);
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 img {
@@ -116,12 +116,12 @@ img {
 }
 
 a {
-  color: var(--color-accent-primary);
+  color: var(--color-primary);
   text-decoration: none;
 }
 
 a:hover {
-  color: var(--color-accent-secondary);
+  color: var(--color-accent-red);
 }
 
 ul {
@@ -137,14 +137,16 @@ ul {
 
 h1, h2, h3, h4 {
   font-family: var(--font-heading);
-  color: var(--color-text);
-  line-height: 1.25;
+  font-optical-sizing: auto; /* lets Fraunces auto-adjust its shape for the size it's used at */
+  color: var(--color-primary);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
   margin-top: 0;
 }
 
-h1 { font-size: 2.75rem; }
-h2 { font-size: 2rem; margin-bottom: var(--space-md); }
-h3 { font-size: 1.4rem; }
+h1 { font-size: 3rem; font-weight: 600; }
+h2 { font-size: 2.1rem; font-weight: 600; margin-bottom: var(--space-md); }
+h3 { font-size: 1.4rem; font-weight: 600; }
 
 p {
   margin-top: 0;
@@ -153,7 +155,8 @@ p {
 
 .section-subtitle {
   color: var(--color-text-muted);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
+  line-height: 1.7;
   max-width: 700px;
 }
 
@@ -173,14 +176,26 @@ p {
   padding-right: var(--space-md);
 }
 
-/* Generic vertical spacing for page sections. */
+/* Generous vertical spacing for page sections — part of the "sophisticated,
+   not cramped" feel is simply more breathing room than a typical template. */
 section {
-  padding-top: var(--space-xl);
-  padding-bottom: var(--space-xl);
+  padding-top: var(--space-xxl);
+  padding-bottom: var(--space-xxl);
 }
 
 .section-alt {
   background-color: var(--color-bg-alt);
+}
+
+/* This is a single page with a sticky nav bar — without this, clicking a
+   nav link like "Mission" would scroll the section title right under the
+   nav bar, partly hidden behind it. This nudges the scroll position down
+   so the heading lands just below the nav instead. Applies to any element
+   with an id (not just <section>), since some nav links (like "Member
+   Organizations") jump to a heading inside a section rather than the
+   section itself. */
+[id] {
+  scroll-margin-top: var(--space-lg);
 }
 
 
@@ -189,7 +204,7 @@ section {
    ========================================================================== */
 
 .site-header {
-  background-color: var(--color-bg-alt);
+  background-color: var(--color-primary);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -209,10 +224,14 @@ section {
   display: flex;
   align-items: center;
   gap: var(--space-xs);
-  color: var(--color-text);
+  color: var(--color-on-primary);
+}
+
+.nav-brand span {
   font-family: var(--font-heading);
+  font-optical-sizing: auto;
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
 }
 
 .nav-brand img {
@@ -222,7 +241,7 @@ section {
 }
 
 .nav-brand:hover {
-  color: var(--color-text);
+  color: var(--color-on-primary);
   opacity: 0.85;
 }
 
@@ -233,8 +252,10 @@ section {
 }
 
 .nav-links a {
-  color: var(--color-text);
+  color: var(--color-on-primary);
   font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
   padding: var(--space-xs) 0;
   border-bottom: 2px solid transparent;
   transition: border-color var(--transition-speed) ease;
@@ -242,8 +263,8 @@ section {
 
 .nav-links a:hover,
 .nav-links a.active {
-  color: var(--color-text);
-  border-bottom-color: var(--color-accent-primary);
+  color: var(--color-on-primary);
+  border-bottom-color: var(--color-accent-gold);
 }
 
 /* Hamburger button — hidden on desktop, shown on mobile (see media query below) */
@@ -263,7 +284,7 @@ section {
   display: block;
   height: 3px;
   width: 100%;
-  background-color: var(--color-text);
+  background-color: var(--color-on-primary);
   border-radius: 2px;
 }
 
@@ -274,11 +295,15 @@ section {
 
 .btn {
   display: inline-block;
-  font-family: var(--font-heading);
+  font-family: var(--font-body);
   font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
   padding: var(--space-xs) var(--space-md);
   border-radius: var(--border-radius);
   transition: background-color var(--transition-speed) ease,
+              color var(--transition-speed) ease,
+              border-color var(--transition-speed) ease,
               transform var(--transition-speed) ease;
   border: 2px solid transparent;
 }
@@ -287,64 +312,83 @@ section {
   transform: translateY(-2px);
 }
 
-/* Solid, high-attention button (main call-to-action). Hover swaps from
-   gold to teal — both are light enough to keep the dark button text
-   readable, so no separate "darker" color variables are needed. */
+/* Solid, high-attention button (main call-to-action). */
 .btn-primary {
-  background-color: var(--color-accent-primary);
-  color: var(--color-button-text);
+  background-color: var(--color-accent-gold);
+  color: var(--color-on-gold);
 }
 
 .btn-primary:hover {
-  background-color: var(--color-accent-secondary);
-  color: var(--color-button-text);
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
 }
 
-/* Outline button (secondary call-to-action) */
+/* Understated secondary action — styled as an underlined text link rather
+   than a boxed button, which reads as more editorial/refined than a second
+   competing button next to the primary one. */
 .btn-outline {
   background-color: transparent;
-  border-color: var(--color-text);
-  color: var(--color-text);
+  border: none;
+  border-bottom: 1px solid var(--color-accent-gold);
+  border-radius: 0;
+  color: var(--color-primary);
+  padding: var(--space-xs) 0;
 }
 
 .btn-outline:hover {
-  background-color: var(--color-text);
-  color: var(--color-bg);
+  border-bottom-color: var(--color-accent-red);
+  color: var(--color-primary);
+  transform: none;
 }
 
 
 /* ==========================================================================
    7. HERO SECTION (top banner on the Home page)
    ========================================================================== */
+/* Sits on the same ivory canvas as the rest of the page (no separate
+   colored band) — the large serif headline and generous spacing do the
+   work of making this section feel like an opening statement. */
 
 .hero {
-  background-color: var(--color-bg-alt);
-  background-image: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
-  color: var(--color-text);
   padding-top: var(--space-xxl);
-  padding-bottom: var(--space-xxl);
-  text-align: center;
+  padding-bottom: var(--space-lg);
+}
+
+/* Headline+subheading text column, and logo, side by side. On mobile (see
+   media query below) this stacks into a column instead. */
+.hero-heading-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-md);
+}
+
+/* Keeps the subheading directly under the headline regardless of how tall
+   the logo next to them is. */
+.hero-heading-text {
+  flex: 1;
+  min-width: 0;
 }
 
 .hero h1 {
-  color: var(--color-text);
   margin-bottom: var(--space-sm);
+  max-width: 680px;
+}
+
+.hero-logo {
+  width: 260px;
+  height: 260px;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 .hero p {
-  font-size: 1.25rem;
-  max-width: 650px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: var(--space-lg);
+  font-size: 1.2rem;
+  line-height: 1.7;
+  max-width: 560px;
+  margin-bottom: 0;
   color: var(--color-text-muted);
-}
-
-.hero-buttons {
-  display: flex;
-  gap: var(--space-sm);
-  justify-content: center;
-  flex-wrap: wrap;
 }
 
 
@@ -352,68 +396,13 @@ section {
    8. MISSION / INTRO SECTION
    ========================================================================== */
 
-.mission {
-  text-align: center;
-}
-
 .mission .container {
   max-width: 800px;
 }
 
-.mission .section-subtitle {
-  margin-left: auto;
-  margin-right: auto;
-}
-
 
 /* ==========================================================================
-   9. HIGHLIGHTS SECTION (the 3 cards linking to About / Organizations / Events)
-   ========================================================================== */
-
-.highlights-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-md);
-  margin-top: var(--space-lg);
-}
-
-.highlight-card {
-  background-color: var(--color-bg-alt);
-  border: 1px solid var(--color-border);
-  border-top: 3px solid var(--color-accent-primary); /* default top-accent color, overridden below */
-  border-radius: var(--border-radius);
-  padding: var(--space-lg);
-  text-align: center;
-  box-shadow: var(--shadow-card);
-  transition: transform var(--transition-speed) ease;
-}
-
-/* Give each of the 3 highlight cards a different top-accent color, just
-   for a little visual variety. Purely decorative — safe to remove the
-   border-top-color line from any of these if you'd rather they match. */
-.highlights-grid .highlight-card:nth-child(1) { border-top-color: var(--color-accent-primary); }
-.highlights-grid .highlight-card:nth-child(2) { border-top-color: var(--color-accent-secondary); }
-.highlights-grid .highlight-card:nth-child(3) { border-top-color: var(--color-accent-terracotta); }
-
-.highlight-card:hover {
-  transform: translateY(-4px);
-}
-
-.highlight-card h3 {
-  margin-bottom: var(--space-xs);
-}
-
-.highlight-card p {
-  color: var(--color-text-muted);
-}
-
-.highlight-card .btn {
-  margin-top: var(--space-xs);
-}
-
-
-/* ==========================================================================
-   10. CARD GRIDS (reused on the Organizations and Events pages in Stage 2)
+   9. CARD GRIDS (used by the Member Organizations grid)
    ========================================================================== */
 
 .card-grid {
@@ -425,12 +414,12 @@ section {
 
 
 /* ==========================================================================
-   11. FOOTER (shared across every page)
+   10. FOOTER
    ========================================================================== */
 
 .site-footer {
-  background-color: var(--color-bg-alt);
-  color: var(--color-text);
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
   padding-top: var(--space-lg);
   padding-bottom: var(--space-lg);
   margin-top: var(--space-xl);
@@ -444,18 +433,18 @@ section {
 }
 
 .footer-column h4 {
-  color: var(--color-text);
+  color: var(--color-on-primary);
   margin-bottom: var(--space-sm);
 }
 
 .footer-column a {
-  color: var(--color-text);
+  color: var(--color-on-primary);
   opacity: 0.8;
 }
 
 .footer-column a:hover {
   opacity: 1;
-  color: var(--color-accent-secondary);
+  color: var(--color-accent-gold);
 }
 
 .footer-links li {
@@ -471,45 +460,19 @@ section {
   text-align: center;
   margin-top: var(--space-lg);
   padding-top: var(--space-md);
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid rgba(244, 237, 220, 0.2);
   font-size: 0.9rem;
-  color: var(--color-text-muted);
+  opacity: 0.75;
 }
 
 
 /* ==========================================================================
-   12. PAGE HEADER (small banner at the top of About / Organizations /
-       Events / Contact — the interior-page equivalent of the home page hero)
-   ========================================================================== */
-
-.page-header {
-  background-color: var(--color-bg-alt);
-  text-align: center;
-  padding-top: var(--space-xl);
-  padding-bottom: var(--space-xl);
-}
-
-.page-header h1 {
-  margin-bottom: var(--space-xs);
-}
-
-.page-header p {
-  color: var(--color-text-muted);
-  font-size: 1.15rem;
-  max-width: 650px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 0;
-}
-
-
-/* ==========================================================================
-   13. VALUES SECTION (About page)
+   11. VALUES SECTION
    ========================================================================== */
 
 /* "auto-fit" lets this adjust cleanly whether you have 3 values or 6,
-   without needing to change the CSS — unlike .highlights-grid/.card-grid,
-   which are fixed at 3 columns. */
+   without needing to change the CSS — unlike .card-grid, which is fixed
+   at 3 columns. */
 .values-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -518,22 +481,19 @@ section {
 }
 
 .value-card {
-  background-color: var(--color-bg-alt);
+  background-color: var(--color-surface);
   border: 1px solid var(--color-border);
+  border-top: 3px solid var(--color-accent-gold); /* default, cycled below */
   border-radius: var(--border-radius);
   padding: var(--space-md);
 }
 
-/* Cycles through all 4 accent colors for the little bar above each value's
-   title, in order, repeating if there are more than 4 values. Purely
+/* Cycles through the 3 accent colors (gold, red, green) for the bar above
+   each value's title, repeating if there are more than 3 values. Purely
    decorative — delete the border-top rules below if you'd rather they
    all match one color. */
-.value-card {
-  border-top: 3px solid var(--color-accent-primary);
-}
-.values-grid .value-card:nth-child(4n+2) { border-top-color: var(--color-accent-secondary); }
-.values-grid .value-card:nth-child(4n+3) { border-top-color: var(--color-accent-terracotta); }
-.values-grid .value-card:nth-child(4n+4) { border-top-color: var(--color-accent-green); }
+.values-grid .value-card:nth-child(3n+2) { border-top-color: var(--color-accent-red); }
+.values-grid .value-card:nth-child(3n+3) { border-top-color: var(--color-primary); }
 
 .value-card h3 {
   margin-bottom: var(--space-xs);
@@ -546,166 +506,164 @@ section {
 
 
 /* ==========================================================================
-   14. ORGANIZATIONS PAGE
+   12. MEMBER ORGANIZATIONS GRID (Home page, under the hero)
    ========================================================================== */
 
-/* Each organization card is built by js/main.js from the "organizations"
-   data list at the top of that file — see the comments there for how to
-   add a new one. .card-grid (Section 10) arranges them into a 3-column
-   grid that collapses to 1 column on mobile. */
+/* Each card is built by js/main.js from the "memberOrganizations" data
+   list at the top of that file — see the comments there for how to add a
+   new one. .card-grid (Section 9) arranges them into a 3-column grid that
+   collapses to 1 column on mobile. */
 
 .org-card {
-  background-color: var(--color-bg-alt);
+  background-color: var(--color-surface);
   border: 1px solid var(--color-border);
+  border-top: 3px solid var(--color-accent-gold); /* default, cycled below */
   border-radius: var(--border-radius);
-  padding: var(--space-lg);
+  padding: var(--space-md);
   text-align: center;
   box-shadow: var(--shadow-card);
 }
 
+.card-grid .org-card:nth-child(3n+2) { border-top-color: var(--color-accent-red); }
+.card-grid .org-card:nth-child(3n+3) { border-top-color: var(--color-primary); }
+
 .org-logo {
-  height: 80px;
-  width: 80px;
+  height: 140px;
+  width: 140px;
   object-fit: contain;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: var(--space-sm);
 }
 
-.org-card p {
-  color: var(--color-text-muted);
+.org-card h3 {
+  font-size: 1.15rem;
 }
 
-.org-card .btn {
+/* The organization's own website, on its own line below their name. */
+.org-website-row {
   margin-top: var(--space-xs);
 }
 
-/* The row of social media links under the "Visit Website" button */
-.org-social {
+.org-website-link {
+  font-weight: 600;
+}
+
+/* The row of social platform icon badges below the website line. */
+.org-social-icons {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: var(--space-sm);
+  gap: var(--space-xs);
   margin-top: var(--space-sm);
-  font-size: 0.9rem;
 }
 
-
-/* ==========================================================================
-   15. EVENTS PAGE
-   ========================================================================== */
-
-/* Each event card is built by js/main.js from the "events" data list at
-   the top of that file, then automatically sorted into the "Upcoming" and
-   "Past" sections based on today's date. */
-
-.event-card {
-  background-color: var(--color-bg-alt);
+.org-social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
   border: 1px solid var(--color-border);
-  border-left: 3px solid var(--color-accent-secondary);
-  border-radius: var(--border-radius);
-  padding: var(--space-lg);
-  box-shadow: var(--shadow-card);
+  color: var(--color-primary);
+  transition: color var(--transition-speed) ease, border-color var(--transition-speed) ease;
 }
 
-.event-date {
-  color: var(--color-accent-primary);
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 0.85rem;
-  letter-spacing: 0.03em;
-  margin-bottom: var(--space-xs);
+.org-social-icon:hover {
+  color: var(--color-accent-red);
+  border-color: var(--color-accent-red);
 }
 
-.event-location {
-  color: var(--color-text-muted);
-  font-style: italic;
-}
-
-.event-card .btn {
-  margin-top: var(--space-xs);
-}
-
-/* Shown instead of a card grid when there are no upcoming or no past
-   events yet (see js/main.js). */
-.empty-list-message {
-  color: var(--color-text-muted);
-  text-align: center;
-  padding: var(--space-lg) 0;
+.org-social-icon svg {
+  width: 18px;
+  height: 18px;
 }
 
 
 /* ==========================================================================
-   16. CONTACT PAGE
+   13. EVENTS SECTION
    ========================================================================== */
 
-.contact-layout {
+/* Roadmap image + ABRCMS session cards side by side (see #events in
+   index.html). Stacks to a single column on mobile — see the media query
+   below. */
+.events-layout {
   display: grid;
   grid-template-columns: 1fr 1.3fr;
   gap: var(--space-xl);
   align-items: start;
+  margin-top: var(--space-lg);
 }
 
-.contact-info h3 {
-  margin-top: var(--space-md);
-  margin-bottom: var(--space-xs);
-}
-
-.contact-info h3:first-child {
-  margin-top: 0;
-}
-
-.contact-info .footer-social a {
-  color: var(--color-accent-primary);
-}
-
-.form-group {
-  margin-bottom: var(--space-md);
-}
-
-.form-group label {
-  display: block;
-  font-weight: 600;
-  margin-bottom: var(--space-xs);
-}
-
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: var(--space-xs) var(--space-sm);
-  font-family: var(--font-body);
-  font-size: 1rem;
-  color: var(--color-text);
-  background-color: var(--color-bg-alt);
-  border: 1px solid var(--color-border);
+.events-image {
   border-radius: var(--border-radius);
+  box-shadow: var(--shadow-card);
+  position: sticky;
+  top: calc(var(--space-xl) + 70px); /* clears the sticky nav bar */
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: var(--color-accent-primary);
+.abrcms-events-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
 }
 
-.form-group textarea {
-  resize: vertical;
-  min-height: 140px;
+.abrcms-event-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-accent-gold); /* default, cycled below */
+  border-radius: var(--border-radius);
+  padding: var(--space-md);
+  box-shadow: var(--shadow-card);
 }
 
-.contact-form .btn {
-  border: none;
-  cursor: pointer;
+.abrcms-events-list .abrcms-event-card:nth-child(3n+2) { border-left-color: var(--color-accent-red); }
+.abrcms-events-list .abrcms-event-card:nth-child(3n+3) { border-left-color: var(--color-primary); }
+
+.abrcms-event-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
 }
 
-.form-note {
+.abrcms-event-logo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.abrcms-event-header h3 {
+  font-size: 1.15rem;
+  margin-bottom: 2px;
+}
+
+.abrcms-event-host {
   color: var(--color-text-muted);
   font-size: 0.9rem;
-  margin-top: var(--space-sm);
+  font-style: italic;
+  margin-bottom: 0;
+}
+
+.abrcms-event-card p {
+  color: var(--color-text);
+}
+
+.event-bullets {
+  margin: var(--space-xs) 0 0;
+  padding-left: 1.2rem;
+}
+
+.event-bullets li {
+  list-style: disc;
+  margin-bottom: var(--space-xs);
 }
 
 
 /* ==========================================================================
-   17. PLACEHOLDER MARKERS
+   14. PLACEHOLDER MARKERS
    ========================================================================== */
 /* Anything with this class is content you still need to replace. It gets a
    dashed outline and a tinted background so it's easy to spot while editing.
@@ -713,14 +671,14 @@ section {
    you've swapped in real content (or leave it, it won't break anything). */
 
 .placeholder {
-  outline: 2px dashed var(--color-accent-terracotta);
+  outline: 2px dashed var(--color-accent-red);
   outline-offset: 4px;
-  background-color: rgba(193, 80, 46, 0.12);
+  background-color: rgba(163, 39, 42, 0.06);
 }
 
 
 /* ==========================================================================
-   13. RESPONSIVE / MOBILE STYLES
+   15. RESPONSIVE / MOBILE STYLES
    ========================================================================== */
 /* NOTE: CSS variables can't be used inside "@media (max-width: ...)"
    conditions, so the breakpoint numbers below are plain pixel values.
@@ -728,24 +686,39 @@ section {
 
 @media (max-width: 768px) {
 
-  h1 { font-size: 2rem; }
-  h2 { font-size: 1.6rem; }
+  h1 { font-size: 2.25rem; }
+  h2 { font-size: 1.7rem; }
 
-  /* Stack the highlight cards and org/event cards into a single column */
-  .highlights-grid,
+  /* Stack the hero headline and logo instead of side by side */
+  .hero-heading-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+
+  .hero-logo {
+    width: 150px;
+    height: 150px;
+  }
+
+  /* Stack the organization cards into a single column */
   .card-grid {
     grid-template-columns: 1fr;
+  }
+
+  /* Stack the Events roadmap image above the session cards */
+  .events-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .events-image {
+    position: static;
   }
 
   /* Collapse the footer columns into a single stacked column */
   .footer-content {
     flex-direction: column;
     gap: var(--space-md);
-  }
-
-  /* Stack the contact page's info column and form on top of each other */
-  .contact-layout {
-    grid-template-columns: 1fr;
   }
 
   /* --- Mobile nav menu --- */
@@ -759,7 +732,7 @@ section {
     top: 100%;
     left: 0;
     right: 0;
-    background-color: var(--color-bg-alt);
+    background-color: var(--color-primary);
     flex-direction: column;
     align-items: center;
     gap: 0;

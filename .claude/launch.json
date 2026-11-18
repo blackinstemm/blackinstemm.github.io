@@ -2,10 +2,15 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "blackinstemm-site",
+      "name": "blackinstemm-redesign-preview-v2",
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server", "4173"],
       "port": 4173
+    },
+    {
+      "name": "blackinstemm-live-5544",
+      "url": "http://localhost:5544",
+      "port": 5544
     }
   ]
 }

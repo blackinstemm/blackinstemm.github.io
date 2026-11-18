@@ -1,6 +1,7 @@
-# Content-planning Word docs — collaborative drafts, not site source.
-# Kept local; text gets copied into the HTML/js/main.js by hand once finalized.
+# Content-planning Word docs and source spreadsheets — reference material,
+# not site source. Kept local; data gets copied into js/main.js by hand.
 *.docx
+*.xlsx
 ~$*
 
 # macOS
